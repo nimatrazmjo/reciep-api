@@ -7,21 +7,20 @@ services:
         ports:
             - "8000:8000"
         env_file:
-            - path: .env
-              required: false
-        # depends_on:
-        #     - db
+            - .env
+        depends_on:
+            - db
         volumes:
             - ./app:/app
         command: python manage.py runserver 0.0.0.0:8000
-#     db:
-#         image: postgres:17-alpine
-#         environment:
-#             POSTGRES_DB: ${POSTGRES_DB}
-#             POSTGRES_USER: ${POSTGRES_USER}
-#             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-#         volumes:
-#             - db_data:/var/lib/postgresql/data
+    db:
+        image: postgres:17-alpine
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        volumes:
+            - db_data:/var/lib/postgresql/data
 
-# volumes:
-#     db_data:
+volumes:
+    db_data:

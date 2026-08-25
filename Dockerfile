@@ -16,6 +16,10 @@ ENV PYTHONUNBUFFERED=1 \
     HOME=/home/appuser \
     PATH=/home/appuser/.local/bin:$PATH
 
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y postgresql-client libpq-dev && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN addgroup --system appuser && adduser --system --ingroup appuser appuser
 
 WORKDIR /app
