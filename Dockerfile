@@ -20,14 +20,16 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -y postgresql-client libpq-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN addgroup --system appuser && adduser --system --ingroup appuser appuser
+RUN addgroup --system appuser && \
+    adduser --system --ingroup appuser --home /home/appuser --shell /bin/bash appuser
 
 WORKDIR /app
 
 COPY --from=builder /root/.local /home/appuser/.local
 COPY . .
 
-RUN chown -R appuser:appuser /app
+RUN chown -R appuser:appuser /app /home/appuser
+
 USER appuser
 
 EXPOSE 8000
