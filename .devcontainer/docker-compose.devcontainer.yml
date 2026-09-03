@@ -1,0 +1,6 @@
+# docker-compose.devcontainer.yml
+services:
+    web:
+        command: sleep infinity # don't let the app's own CMD race the editor's exec
+        volumes:
+            - ..:/app:cached # bind-mount source with a macOS-friendly consistency flag

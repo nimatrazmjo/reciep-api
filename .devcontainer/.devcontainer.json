@@ -1,0 +1,11 @@
+{
+    "name": "django-postgres-dev",
+    "dockerComposeFile": [
+        "../docker-compose.yml",
+        "docker-compose.devcontainer.yml"
+    ],
+    "service": "web",
+    "runServices": ["web", "db"],
+    "workspaceFolder": "/app",
+    "shutdownAction": "stopCompose"
+}
